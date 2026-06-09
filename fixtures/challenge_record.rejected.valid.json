@@ -1,0 +1,11 @@
+{
+  "schema_version": "originagent.evolution.challenge_record.v1",
+  "challenge_id": "0x201f8f67525b2a5d36a5444f496865b4ea222b937a106522df2cc91adf7ba75a",
+  "evidence_id": "0x4608833254e9b5491ec7d796fd2fe8e13e31d25baacfde7ba97c8212a26b866a",
+  "module_digest": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "reason_hash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "challenger": "0x9999999999999999999999999999999999999999",
+  "created_at": "2026-05-23T00:01:00Z",
+  "status": "rejected",
+  "resolution_hash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

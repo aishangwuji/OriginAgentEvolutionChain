@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/evolution-manifest.schema.json",
+  "title": "EvolutionManifest",
+  "type": "object",
+  "required": ["module_id", "module_type", "version", "permissions"],
+  "properties": {
+    "module_id": { "type": "string", "minLength": 1 },
+    "module_type": { "enum": ["skill", "domain_pack", "workflow", "tool"] },
+    "version": { "type": "string", "minLength": 1 },
+    "permissions": { "type": "object" },
+    "context_budget": { "type": "object" },
+    "external_endpoints": { "type": "array" },
+    "external_side_effects": { "type": "object" }
+  }
+}

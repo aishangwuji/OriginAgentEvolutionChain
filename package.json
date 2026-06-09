@@ -1,0 +1,20 @@
+{
+  "name": "originagent-evolution-chain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "OriginAgentEvolutionChain": "./sdk/src/cli.ts"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "npm run test:sdk",
+    "test:sdk": "node --test sdk/test/*.test.ts",
+    "test:contracts": "cd contracts && forge test"
+  },
+  "dependencies": {
+    "viem": "^2.39.0"
+  }
+}

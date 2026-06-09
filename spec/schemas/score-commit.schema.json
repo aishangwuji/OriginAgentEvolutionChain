@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/score-commit.schema.json",
+  "title": "ScoreCommit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["moduleDigest", "commitHash"],
+  "properties": {
+    "moduleDigest": { "$ref": "#/$defs/bytes32" },
+    "commitHash": { "$ref": "#/$defs/bytes32" }
+  },
+  "$defs": {
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    }
+  }
+}

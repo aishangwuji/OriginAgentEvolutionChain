@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/module-submission.schema.json",
+  "title": "ModuleSubmission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "moduleDigest",
+    "moduleIdHash",
+    "moduleType",
+    "versionHash",
+    "manifestHash",
+    "proofBundleHash",
+    "storageUri"
+  ],
+  "properties": {
+    "moduleDigest": { "$ref": "#/$defs/bytes32" },
+    "moduleIdHash": { "$ref": "#/$defs/bytes32" },
+    "moduleType": { "enum": ["skill", "domain_pack", "workflow", "tool"] },
+    "versionHash": { "$ref": "#/$defs/bytes32" },
+    "manifestHash": { "$ref": "#/$defs/bytes32" },
+    "proofBundleHash": { "$ref": "#/$defs/bytes32" },
+    "storageUri": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    }
+  }
+}

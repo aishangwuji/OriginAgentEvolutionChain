@@ -1,0 +1,20 @@
+{
+  "schema_version": "originagent.evolution.proof_bundle.v1",
+  "artifact_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+  "module_id": "demo-skill",
+  "module_type": "skill",
+  "module_version": "1.0.0",
+  "verification_event_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "activation_event_hash": "",
+  "verification_report_digest": "3333333333333333333333333333333333333333333333333333333333333333",
+  "capability_snapshot_digest": "",
+  "telemetry_digest": "4444444444444444444444444444444444444444444444444444444444444444",
+  "state_branch_digest": "",
+  "ledger_tip_hash": "5555555555555555555555555555555555555555555555555555555555555555",
+  "created_at": "2026-05-22T00:00:00+00:00",
+  "actor": "tester",
+  "actor_public_key": "",
+  "signature_scheme": "ed25519",
+  "signature": "",
+  "proof_bundle_hash": "51aea71091be59887e07694fc704cbb52c87d16cc301ab36dd3ba203ce7f5494"
+}

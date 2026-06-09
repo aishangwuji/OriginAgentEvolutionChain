@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/score-reveal.schema.json",
+  "title": "ScoreReveal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["moduleDigest", "score", "reasonHash", "salt"],
+  "properties": {
+    "moduleDigest": { "$ref": "#/$defs/bytes32" },
+    "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "reasonHash": { "$ref": "#/$defs/bytes32" },
+    "salt": { "$ref": "#/$defs/bytes32" }
+  },
+  "$defs": {
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    }
+  }
+}

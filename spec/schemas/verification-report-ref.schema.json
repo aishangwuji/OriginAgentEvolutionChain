@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/verification-report-ref.schema.json",
+  "title": "VerificationReportRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "moduleDigest",
+    "proofBundleHash",
+    "verificationReportHash",
+    "capabilitySnapshotHash",
+    "telemetryDigest"
+  ],
+  "properties": {
+    "moduleDigest": { "$ref": "#/$defs/bytes32" },
+    "proofBundleHash": { "$ref": "#/$defs/bytes32" },
+    "verificationReportHash": { "$ref": "#/$defs/bytes32" },
+    "capabilitySnapshotHash": { "$ref": "#/$defs/bytes32" },
+    "telemetryDigest": { "$ref": "#/$defs/bytes32" }
+  },
+  "$defs": {
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    }
+  }
+}

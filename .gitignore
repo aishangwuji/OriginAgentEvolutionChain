@@ -1,0 +1,8 @@
+node_modules/
+dist/
+cache/
+out/
+broadcast/
+coverage/
+.env
+*.log

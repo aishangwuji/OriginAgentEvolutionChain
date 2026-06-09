@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/tool-module.schema.json",
+  "title": "ToolModule",
+  "type": "object",
+  "required": ["module_id", "module_type", "version", "parameters_schema", "permissions"],
+  "additionalProperties": false,
+  "properties": {
+    "module_id": { "type": "string", "minLength": 1 },
+    "module_type": { "const": "tool" },
+    "version": { "type": "string", "minLength": 1 },
+    "parameters_schema": { "type": "object" },
+    "permissions": { "type": "object" }
+  }
+}

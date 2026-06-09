@@ -1,0 +1,13 @@
+{
+  "schema_version": "originagent.evolution.evidence_report.v1",
+  "module_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "proof_bundle_hash": "cb18c111559d1102a7e30d5e8af1ea4f31307ad790f3edf81d6882d90e8ad56e",
+  "report_hash": "f48f32e333a5fea22e7ee16dae92b2df72abb32bed63d8fa324f5efd0cd796d7",
+  "evidence_type": "unqualified_validator_report",
+  "reporter": "0x9999999999999999999999999999999999999999",
+  "operator_group_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+  "runner_fingerprint_hash": "5555555555555555555555555555555555555555555555555555555555555555",
+  "challenge_window_end": 1893456000,
+  "report_status": "active",
+  "testnet_only": true
+}

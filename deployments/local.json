@@ -1,0 +1,18 @@
+{
+  "chainId": 31337,
+  "network": "local",
+  "contracts": {
+    "IdentityRegistry": "0x1111111111111111111111111111111111111111",
+    "AgentPassportRegistry": "0x6666666666666666666666666666666666666666",
+    "AgentReputationRegistry": "0x7777777777777777777777777777777777777777",
+    "EvolutionUnitKindRegistry": "0x8888888888888888888888888888888888888888",
+    "TestCreditLedger": "0x9999999999999999999999999999999999999999",
+    "ChallengeAdjudicationRegistry": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "ModuleRegistry": "0x2222222222222222222222222222222222222222",
+    "VerificationRegistry": "0x3333333333333333333333333333333333333333",
+    "ScoreCommitReveal": "0x4444444444444444444444444444444444444444"
+  },
+  "deployer": "0x5555555555555555555555555555555555555555",
+  "deployedAt": "local-fixture",
+  "contractVersion": "ec15a.0.0"
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "originagent.evolution.proof_bundle.v1",
+  "artifact_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "module_id": "demo-tool",
+  "module_type": "tool",
+  "module_version": "1.0.0",
+  "verification_event_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "activation_event_hash": "",
+  "verification_report_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "capability_snapshot_digest": "",
+  "telemetry_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "state_branch_digest": "",
+  "ledger_tip_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "created_at": "2026-05-22T00:00:00+00:00",
+  "actor": "tester",
+  "actor_public_key": "",
+  "signature_scheme": "ed25519",
+  "signature": "",
+  "proof_bundle_hash": "cb18c111559d1102a7e30d5e8af1ea4f31307ad790f3edf81d6882d90e8ad56e"
+}

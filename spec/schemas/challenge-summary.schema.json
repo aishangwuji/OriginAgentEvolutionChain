@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/challenge-summary.schema.json",
+  "title": "ChallengeSummary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "reputation",
+    "invalidated_evidence_ids",
+    "rejected_challenge_ids",
+    "challenges"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "originagent.evolution.challenge_summary.v1" },
+    "reputation": {
+      "type": "object",
+      "additionalProperties": { "type": "integer" }
+    },
+    "invalidated_evidence_ids": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(0x)?[0-9a-fA-F]{64}$" }
+    },
+    "rejected_challenge_ids": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(0x)?[0-9a-fA-F]{64}$" }
+    },
+    "challenges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "challenge_id",
+          "evidence_id",
+          "module_digest",
+          "challenger",
+          "status",
+          "reputation_delta"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "challenge_id": { "type": "string", "pattern": "^(0x)?[0-9a-fA-F]{64}$" },
+          "evidence_id": { "type": "string", "pattern": "^(0x)?[0-9a-fA-F]{64}$" },
+          "module_digest": { "type": "string", "pattern": "^(0x)?[0-9a-fA-F]{64}$" },
+          "challenger": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+          "status": { "enum": ["submitted", "upheld", "rejected"] },
+          "reputation_delta": {
+            "type": "object",
+            "additionalProperties": { "type": "integer" }
+          }
+        }
+      }
+    }
+  }
+}

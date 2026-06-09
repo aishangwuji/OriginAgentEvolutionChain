@@ -1,0 +1,14 @@
+{
+  "schema_version": "originagent.evolution.challenge_record.v1",
+  "challenge_id": "0x404dc225fc320b3990e027d7386acae0423f1613f80b64bf4fd6e7aac3826651",
+  "evidence_id": "0x361b495f66880e093aafba25cae772528fcfd6a76dde0777236bf7a3b5a8baf6",
+  "module_digest": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "reason_hash": "0x9999999999999999999999999999999999999999999999999999999999999999",
+  "challenger": "0x8888888888888888888888888888888888888888",
+  "created_at": "2026-05-23T00:00:00Z",
+  "status": "submitted",
+  "prompt": "private prompt",
+  "note": "C:\\Users\\tester\\secret.txt",
+  "callback": "https://example.invalid/path?token=abc",
+  "secret": "api_key=abc123"
+}

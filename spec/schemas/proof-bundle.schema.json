@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://originagent.local/evolution-chain/proof-bundle.schema.json",
+  "title": "ProofBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_digest",
+    "module_id",
+    "module_type",
+    "module_version",
+    "verification_event_hash",
+    "activation_event_hash",
+    "verification_report_digest",
+    "capability_snapshot_digest",
+    "telemetry_digest",
+    "state_branch_digest",
+    "ledger_tip_hash",
+    "created_at",
+    "actor",
+    "actor_public_key",
+    "signature_scheme",
+    "signature",
+    "proof_bundle_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "originagent.evolution.proof_bundle.v1" },
+    "artifact_digest": { "$ref": "#/$defs/hex64" },
+    "module_id": { "type": "string", "minLength": 1 },
+    "module_type": { "enum": ["skill", "domain_pack", "workflow", "tool"] },
+    "module_version": { "type": "string", "minLength": 1 },
+    "verification_event_hash": { "$ref": "#/$defs/hex64" },
+    "activation_event_hash": { "anyOf": [{ "$ref": "#/$defs/hex64" }, { "const": "" }] },
+    "verification_report_digest": { "$ref": "#/$defs/hex64" },
+    "capability_snapshot_digest": { "anyOf": [{ "$ref": "#/$defs/hex64" }, { "const": "" }] },
+    "telemetry_digest": { "$ref": "#/$defs/hex64" },
+    "state_branch_digest": { "anyOf": [{ "$ref": "#/$defs/hex64" }, { "const": "" }] },
+    "ledger_tip_hash": { "$ref": "#/$defs/hex64" },
+    "created_at": { "type": "string", "minLength": 1 },
+    "actor": { "type": "string", "minLength": 1 },
+    "actor_public_key": { "type": "string" },
+    "signature_scheme": { "const": "ed25519" },
+    "signature": { "type": "string" },
+    "proof_bundle_hash": { "$ref": "#/$defs/hex64" }
+  },
+  "$defs": {
+    "hex64": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
