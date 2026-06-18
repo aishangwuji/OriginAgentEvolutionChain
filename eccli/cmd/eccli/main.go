@@ -6,8 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	sdk "chainmaker.org/chainmaker/sdk-go/v2"
+	"chainmaker.org/chainmaker/common/v2"
 	"github.com/spf13/cobra"
 
 	"originagent-evolution-chain/eccli/pkg/canonical"
@@ -97,9 +99,9 @@ func invoke(contract, method string, params map[string]string) (string, error) {
 	}
 	defer client.Stop()
 
-	var kvs []*sdk.KeyValuePair
+	var kvs []*common.KeyValuePair
 	for k, v := range params {
-		kvs = append(kvs, &sdk.KeyValuePair{Key: k, Value: []byte(v)})
+		kvs = append(kvs, &common.KeyValuePair{Key: k, Value: []byte(v)})
 	}
 
 	resp, err := client.InvokeContract(contract, method, "", kvs, -1, true)
@@ -119,9 +121,9 @@ func query(contract, method string, params map[string]string) (string, error) {
 	}
 	defer client.Stop()
 
-	var kvs []*sdk.KeyValuePair
+	var kvs []*common.KeyValuePair
 	for k, v := range params {
-		kvs = append(kvs, &sdk.KeyValuePair{Key: k, Value: []byte(v)})
+		kvs = append(kvs, &common.KeyValuePair{Key: k, Value: []byte(v)})
 	}
 
 	resp, err := client.QueryContract(contract, method, kvs, -1)
