@@ -19,8 +19,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -152,7 +153,7 @@ func (c *VerificationRegistry) submitReport() protogo.Response {
 		return sdk.Error(fmt.Sprintf("failed to get sender: %w", err))
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -349,7 +350,7 @@ func (c *VerificationRegistry) submitChallenge() protogo.Response {
 		return sdk.Error("evidence is not active")
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -492,7 +493,7 @@ func (c *VerificationRegistry) recordEvidence(
 		}
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -568,7 +569,7 @@ func (c *VerificationRegistry) resolveChallengeInternal(challengeID string, uphe
 		challenge.Status = common.ChallengeStatusRejected
 	}
 
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 	challenge.ResolvedAt = timestamp
 	challenge.ResolutionHash = resolutionHash
 
@@ -700,5 +701,5 @@ func requireFoundationOrg() error {
 }
 
 func main() {
-	sdk.Instance.Start(new(VerificationRegistry))
+	sandbox.Start(new(VerificationRegistry))
 }

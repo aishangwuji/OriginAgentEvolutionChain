@@ -12,8 +12,9 @@ package main
 import (
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -88,7 +89,7 @@ func (c *AgentReputationRegistry) checkpointReputation() protogo.Response {
 	fmt.Sscanf(positiveCountStr, "%d", &positiveCount)
 	fmt.Sscanf(negativeCountStr, "%d", &negativeCount)
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -197,5 +198,5 @@ func requireFoundationOrg() error {
 }
 
 func main() {
-	sdk.Instance.Start(new(AgentReputationRegistry))
+	sandbox.Start(new(AgentReputationRegistry))
 }

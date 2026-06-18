@@ -6,3 +6,7 @@ broadcast/
 coverage/
 .env
 *.log
+
+# ChainMaker SDK (external dependencies)
+contract-sdk-go/
+sdk-go/

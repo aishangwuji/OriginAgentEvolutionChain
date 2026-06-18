@@ -14,8 +14,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -108,7 +109,7 @@ func (c *AgentPassportRegistry) registerPassport() protogo.Response {
 		}
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -229,7 +230,7 @@ func (c *AgentPassportRegistry) migrateKey() protogo.Response {
 	migrationInput := fmt.Sprintf("%s%s%s%d", passportID, previousKeyHash, newKeyHash, newSequence)
 	migrationHash := computeHashStr(migrationInput)
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %w", err))
 	}
@@ -294,5 +295,5 @@ func invalidHex64(values ...string) bool {
 }
 
 func main() {
-	sdk.Instance.Start(new(AgentPassportRegistry))
+	sandbox.Start(new(AgentPassportRegistry))
 }

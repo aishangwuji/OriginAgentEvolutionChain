@@ -16,8 +16,9 @@ import (
 	"fmt"
 	"strconv"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -94,7 +95,7 @@ func (c *ScoreCommitReveal) commitScore() protogo.Response {
 		}
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %v", err))
 	}
@@ -174,7 +175,7 @@ func (c *ScoreCommitReveal) revealScore() protogo.Response {
 		}
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %v", err))
 	}
@@ -246,5 +247,5 @@ func computeCommitHash(score uint8, reasonHash, salt string) []byte {
 }
 
 func main() {
-	sdk.Instance.Start(new(ScoreCommitReveal))
+	sandbox.Start(new(ScoreCommitReveal))
 }

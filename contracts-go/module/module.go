@@ -10,8 +10,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -93,7 +94,7 @@ func (c *ModuleRegistry) submitModule() protogo.Response {
 		return sdk.Error(fmt.Sprintf("failed to get sender: %v", err))
 	}
 
-	timestamp, err := sdk.Instance.GetTxTimeStamp()
+	timestamp, err := common.GetTxTimestamp()
 	if err != nil {
 		return sdk.Error(fmt.Sprintf("failed to get timestamp: %v", err))
 	}
@@ -172,5 +173,5 @@ func (c *ModuleRegistry) moduleExists() protogo.Response {
 }
 
 func main() {
-	sdk.Instance.Start(new(ModuleRegistry))
+	sandbox.Start(new(ModuleRegistry))
 }

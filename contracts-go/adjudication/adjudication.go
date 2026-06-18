@@ -15,8 +15,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -181,7 +182,7 @@ func (c *ChallengeAdjudicationRegistry) submitResponse() protogo.Response {
 		return sdk.Error("duplicate response hash")
 	}
 
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 
 	state.Started = true
 	state.ResponseHash = responseHash
@@ -236,7 +237,7 @@ func (c *ChallengeAdjudicationRegistry) commitVerdict() protogo.Response {
 		}
 	}
 
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 
 	commit := CommitmentRecord{
 		ChallengeID:    challengeID,
@@ -323,7 +324,7 @@ func (c *ChallengeAdjudicationRegistry) revealVerdict() protogo.Response {
 	sdk.Instance.PutStateFromKey(commitKey, string(commitData))
 
 	// Record verdict.
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 	verdict := VerdictRecord{
 		ChallengeID:           challengeID,
 		Validator:             caller,
@@ -375,7 +376,7 @@ func (c *ChallengeAdjudicationRegistry) finalizeChallenge() protogo.Response {
 		return sdk.Error(fmt.Sprintf("quorum not met: %d/%d", targetCount, c.quorum))
 	}
 
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 	state.Finalized = true
 	state.Outcome = claimedUpheld
 	state.EffectiveVerdictCount = targetCount
@@ -411,7 +412,7 @@ func (c *ChallengeAdjudicationRegistry) expireChallenge() protogo.Response {
 
 	// Must be past reveal period.
 	_, _, revealBy := c.deadlines(challengeID, state)
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 	if timestamp <= revealBy {
 		return sdk.Error("reveal period has not ended")
 	}
@@ -523,7 +524,7 @@ func (c *ChallengeAdjudicationRegistry) currentPhase(challengeID string, state *
 	}
 
 	responseBy, commitBy, revealBy := c.deadlines(challengeID, state)
-	timestamp, _ := sdk.Instance.GetTxTimeStamp()
+	timestamp, _ := common.GetTxTimestamp()
 
 	if timestamp <= responseBy && state.ResponseSubmittedAt == 0 {
 		return common.AdjudicationPhaseResponseOpen
@@ -615,5 +616,5 @@ func requireFoundationOrg() error {
 }
 
 func main() {
-	sdk.Instance.Start(new(ChallengeAdjudicationRegistry))
+	sandbox.Start(new(ChallengeAdjudicationRegistry))
 }

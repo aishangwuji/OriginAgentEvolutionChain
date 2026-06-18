@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	sdk "chainmaker.org/chainmaker/sdk-go/v2"
-	"chainmaker.org/chainmaker/common/v2"
+	"chainmaker.org/chainmaker/pb-go/v2/common"
 	"github.com/spf13/cobra"
 
 	"originagent-evolution-chain/eccli/pkg/canonical"

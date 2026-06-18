@@ -2,7 +2,12 @@
 // for the OriginAgent Evolution Chain consortium network.
 package common
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"strconv"
+
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
+)
 
 // Identity roles — mirrors IdentityRegistry.IdentityRole from the Solidity version.
 const (
@@ -123,6 +128,19 @@ func ToJSON(v any) ([]byte, error) {
 // FromJSON unmarshals canonical JSON bytes into a value.
 func FromJSON(data []byte, v any) error {
 	return json.Unmarshal(data, v)
+}
+
+// GetTxTimestamp returns the current transaction timestamp as int64 (Unix seconds).
+func GetTxTimestamp() (int64, error) {
+	ts, err := sdk.Instance.GetTxTimeStamp()
+	if err != nil {
+		return 0, err
+	}
+	n, err := strconv.ParseInt(ts, 10, 64)
+	if err != nil {
+		return 0, err
+	}
+	return n, nil
 }
 
 // BytesToHex32 validates that b is exactly 32 bytes and returns it as a hex string.

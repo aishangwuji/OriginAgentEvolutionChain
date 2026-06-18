@@ -14,8 +14,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"chainmaker.org/chainmaker/contract-sdk-go/v2/sandbox"
 	"chainmaker.org/chainmaker/contract-sdk-go/v2/sdk"
-	protogo "chainmaker.org/chainmaker/pb/protogo"
+	protogo "chainmaker.org/chainmaker/contract-sdk-go/v2/pb/protogo"
 
 	"originagent-evolution-chain/contracts-go/common"
 )
@@ -235,5 +236,5 @@ func requireAuthorizedGrantOrg() error {
 }
 
 func main() {
-	sdk.Instance.Start(new(CreditLedger))
+	sandbox.Start(new(CreditLedger))
 }
