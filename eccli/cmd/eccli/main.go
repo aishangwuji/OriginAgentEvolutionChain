@@ -13,6 +13,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"originagent-evolution-chain/eccli/pkg/canonical"
+	"originagent-evolution-chain/eccli/pkg/validate"
 )
 
 var (
@@ -171,37 +172,10 @@ func cmdVerifyProof() *cobra.Command {
 		Use:   "verify-proof",
 		Short: "Verify a proof bundle JSON file",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			var bundle map[string]any
-			if err := loadJSON(proofBundlePath, &bundle); err != nil {
+			bundle, err := validate.ProofBundle(proofBundlePath)
+			if err != nil {
 				return err
 			}
-			// Validate required fields.
-			required := []string{"schema_version", "artifact_digest", "module_id", "module_type",
-				"module_version", "verification_event_hash", "verification_report_digest",
-				"telemetry_digest", "ledger_tip_hash", "created_at", "actor",
-				"actor_public_key", "signature", "proof_bundle_hash"}
-			for _, field := range required {
-				if _, ok := bundle[field]; !ok {
-					return fmt.Errorf("missing required field: %s", field)
-				}
-			}
-
-			// Recompute proof_bundle_hash.
-			pbCopy := make(map[string]any)
-			for k, v := range bundle {
-				if k != "proof_bundle_hash" && k != "signature" {
-					pbCopy[k] = v
-				}
-			}
-			expected, err := canonical.HashJSON(pbCopy)
-			if err != nil {
-				return fmt.Errorf("failed to hash proof bundle: %w", err)
-			}
-			actual, _ := bundle["proof_bundle_hash"].(string)
-			if expected != actual {
-				return fmt.Errorf("proof_bundle_hash mismatch:\n  expected: %s\n  actual:   %s", expected, actual)
-			}
-
 			fmt.Printf("Proof bundle valid.\n  module: %s\n  type: %s\n  digest: %s\n",
 				bundle["module_id"], bundle["module_type"], bundle["artifact_digest"])
 			return nil
@@ -221,8 +195,8 @@ func cmdSubmitModule() *cobra.Command {
 		Use:   "submit-module",
 		Short: "Submit a module to the chain",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			var bundle map[string]any
-			if err := loadJSON(proofBundlePath, &bundle); err != nil {
+			bundle, err := validate.ProofBundle(proofBundlePath)
+			if err != nil {
 				return err
 			}
 
@@ -1042,15 +1016,15 @@ func cmdValidateProof() *cobra.Command {
 		Use:   "validate-proof",
 		Short: "Validate a proof bundle fixture",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			var bundle map[string]any
-			if err := loadJSON(fixturePath, &bundle); err != nil {
-				return err
-			}
-			hash, err := canonical.HashJSON(bundle)
+			bundle, err := validate.LoadProofBundle(fixturePath)
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Proof bundle valid.\n  hash: %s\n", hash)
+			result := validate.ValidateProofBundle(bundle)
+			if !result.OK {
+				return fmt.Errorf("proof bundle invalid:\n  - %s", strings.Join(result.Errors, "\n  - "))
+			}
+			fmt.Printf("Proof bundle valid.\n  hash: %s\n", result.ComputedHash)
 			return nil
 		},
 	}
