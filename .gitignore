@@ -10,3 +10,13 @@ coverage/
 # ChainMaker SDK (external dependencies)
 contract-sdk-go/
 sdk-go/
+
+# Vendored Go deps (generated; needs the cgo SM assets re-added, see TD-2026-002 #6)
+eccli/vendor/
+contracts-go/vendor/
+
+# Qoder local tool cache
+.qoder/
+
+# Local agent instructions may contain credentials; keep out of git
+AGENTS.md
